@@ -12,7 +12,7 @@ export default function ProductCard({ product }) {
     } else {
       const storeUrl = window.location.origin;
       const message = encodeURIComponent(
-        `Hi, I want to buy *${title}* for ₹${price}\n\n🛒 ${storeUrl}`
+        `Hi, I want to buy *${title}* for ₹${price}\n\n ${storeUrl}`
       );
       window.open(
         `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,
