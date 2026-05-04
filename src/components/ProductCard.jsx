@@ -10,9 +10,9 @@ export default function ProductCard({ product }) {
     if (paymentLink) {
       window.open(paymentLink, "_blank", "noopener,noreferrer");
     } else {
-      const productLink = image || "";
+      const storeUrl = window.location.origin;
       const message = encodeURIComponent(
-        `Hi, I want to buy *${title}* for ₹${price}${productLink ? `\n\n${productLink}` : ""}`
+        `Hi, I want to buy *${title}* for ₹${price}\n\n🛒 ${storeUrl}`
       );
       window.open(
         `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,
