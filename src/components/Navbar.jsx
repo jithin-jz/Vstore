@@ -21,13 +21,7 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
   };
 
   return (
-    <nav 
-      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
-        isScrolled 
-          ? "bg-white py-3 border-b border-gray-100/50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]" 
-          : "bg-transparent py-4 sm:py-6"
-      }`}
-    >
+    <nav className="relative z-50 w-full bg-white py-4 border-b border-gray-100">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         {/* Left: Logo */}
         <div className="flex-shrink-0">
@@ -113,30 +107,6 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
             <a href="#products" className="text-sm font-bold text-gray-900 bg-gray-100 px-4 py-2 rounded-xl">
               Shop
             </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Categories Row */}
-      <div className="sm:hidden border-t border-gray-50/50 bg-white/50 backdrop-blur-md">
-        <div className="flex items-center justify-start overflow-x-auto px-4 py-3 hide-scrollbar">
-          <div className="flex gap-2.5">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.value}
-                onClick={() => {
-                  setActiveCategory(cat.value);
-                  document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className={`whitespace-nowrap px-4 py-2 text-xs font-bold transition-all duration-300 rounded-xl ${
-                  activeCategory === cat.value
-                    ? "bg-gray-900 text-white shadow-md shadow-gray-200"
-                    : "bg-gray-100/50 text-gray-500 hover:text-gray-900"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
           </div>
         </div>
       </div>

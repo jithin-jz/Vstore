@@ -53,13 +53,36 @@ export default function Home({ activeCategory, setActiveCategory, searchQuery, s
   }, [activeCategory, searchQuery, products]);
 
   return (
-    <section id="products" className="bg-white pt-36 pb-8 px-3 sm:pt-24 sm:pb-16 sm:px-6">
+    <section id="products" className="bg-white pt-4 pb-8 px-3 sm:pt-12 sm:pb-16 sm:px-6">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="hidden mb-8 text-center sm:mb-12 sm:block">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Digital Solutions
           </h2>
+        </div>
+
+
+
+        {/* Categories Filter - Scrollable Tabs (Mobile Only) */}
+        <div className="mb-10 bg-white py-4 sm:hidden">
+          <div className="flex items-center justify-start overflow-x-auto px-4 hide-scrollbar sm:justify-center sm:px-0">
+            <div className="flex gap-3 sm:flex-wrap sm:justify-center">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat.value}
+                  onClick={() => setActiveCategory(cat.value)}
+                  className={`whitespace-nowrap px-6 py-3 rounded-full text-xs font-bold transition-all duration-300 ${
+                    activeCategory === cat.value
+                        ? "bg-gray-900 text-white shadow-xl shadow-gray-200"
+                      : "bg-white border border-gray-100 text-gray-500 hover:bg-gray-50"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Grid - 2 columns on mobile */}
