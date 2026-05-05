@@ -9,7 +9,7 @@ const runningFeatures = [
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col items-center overflow-hidden bg-white px-4 pt-16 text-center sm:min-h-screen sm:justify-between sm:px-6 sm:pt-32">
+    <section className="hidden flex-col items-center overflow-hidden bg-white px-4 pt-16 text-center sm:flex sm:min-h-screen sm:justify-between sm:px-6 sm:pt-32">
 
 
       {/* Main Content */}

@@ -53,7 +53,7 @@ export default function Home({ activeCategory, setActiveCategory, searchQuery, s
   }, [activeCategory, searchQuery, products]);
 
   return (
-    <section id="products" className="bg-white pt-4 pb-8 px-3 sm:pt-24 sm:pb-16 sm:px-6">
+    <section id="products" className="bg-white pt-20 pb-8 px-3 sm:pt-24 sm:pb-16 sm:px-6">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="hidden mb-8 text-center sm:mb-12 sm:block">
@@ -62,24 +62,7 @@ export default function Home({ activeCategory, setActiveCategory, searchQuery, s
           </h2>
         </div>
 
-        {/* Compact Mobile Search Bar */}
-        <div className="mx-auto mb-6 max-w-2xl px-4 sm:hidden">
-          <div className="relative group">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search premium assets..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-11 w-full rounded-2xl border border-gray-100 bg-white pl-11 pr-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:border-gray-200 focus:ring-4 focus:ring-gray-900/5 transition-all"
-            />
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
-              <svg className="h-4 w-4 text-gray-400 group-focus-within:text-gray-900 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-          </div>
-        </div>
+
 
         {/* Categories Filter - Sticky App Tabs (Mobile Only) */}
         <div className="sticky top-[64px] z-30 -mx-3 mb-10 bg-white py-4 backdrop-blur-md sm:hidden">

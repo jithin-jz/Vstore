@@ -38,13 +38,32 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
           </a>
         </div>
 
+        {/* Mobile Search Bar */}
+        <div className="ml-auto w-[65%] sm:hidden">
+          <div className="relative group">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search assets..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-10 w-full rounded-xl border border-gray-100 bg-gray-50/50 pl-10 pr-3 text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:bg-white focus:ring-4 focus:ring-gray-900/5 transition-all"
+            />
+            <div className="absolute left-3.5 top-1/2 -translate-y-1/2">
+              <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
         {/* Center: Search & Categories */}
         <div className="hidden flex-1 items-center justify-center gap-10 px-8 sm:flex">
           {/* Refined Search Bar */}
           <div className="relative w-full max-w-sm group">
             <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
               <svg className="w-4 h-4 text-gray-400 group-focus-within:text-gray-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
@@ -89,11 +108,7 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
             Support
           </button>
           
-          <div className="flex sm:hidden">
-            <a href="#products" className="text-sm font-bold text-gray-900 bg-gray-100 px-4 py-2 rounded-xl">
-              Shop
-            </a>
-          </div>
+
         </div>
       </div>
     </nav>
