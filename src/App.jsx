@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import BottomNav from "./components/BottomNav";
+import InstallPrompt from "./components/InstallPrompt";
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -26,6 +27,7 @@ export default function App() {
       />
       <Footer />
       <BottomNav setSearchQuery={setSearchQuery} />
+      <InstallPrompt />
     </div>
   );
 }
