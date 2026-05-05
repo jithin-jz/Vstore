@@ -40,16 +40,7 @@ export default function BottomNav({ setSearchQuery }) {
           <span className="text-[10px] font-bold uppercase tracking-widest">Home</span>
         </button>
         
-        <button onClick={(e) => {
-          e.preventDefault();
-          const el = document.getElementById('products');
-          if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-        }} className="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 transition-colors active:scale-90">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
-          <span className="text-[10px] font-bold uppercase tracking-widest">Shop</span>
-        </button>
+
         
         <button onClick={scrollToSearch} className="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 transition-colors active:scale-90">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
