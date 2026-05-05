@@ -33,11 +33,11 @@ export default function BottomNav({ setSearchQuery }) {
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full border-t border-gray-200 bg-white px-6 py-3 sm:hidden">
       <div className="flex items-center justify-between">
-        <button onClick={scrollToTop} className="flex flex-col items-center gap-1 text-gray-900 transition-all active:scale-90">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        <button onClick={scrollToTop} className="flex flex-col items-center gap-0.5 text-[#262626] active:scale-90">
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.75 2.33a.75.75 0 0 0-1.5 0v2.24l-8.72 8.72a.75.75 0 0 0 1.06 1.06l1.22-1.22V21a.75.75 0 0 0 .75.75h5.5a.75.75 0 0 0 .75-.75v-6.5h2.5V21a.75.75 0 0 0 .75.75h5.5a.75.75 0 0 0 .75-.75v-7.89l1.22 1.22a.75.75 0 0 0 1.06-1.06l-8.72-8.72V2.33Z" />
           </svg>
-          <span className="text-[10px] font-bold uppercase tracking-widest">Home</span>
+          <span className="text-[10px] font-medium">Home</span>
         </button>
         
 
@@ -46,25 +46,25 @@ export default function BottomNav({ setSearchQuery }) {
           e.preventDefault();
           const el = document.getElementById('products');
           if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
-        }} className="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 transition-colors active:scale-90">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        }} className="flex flex-col items-center gap-0.5 text-[#8E8E8E] active:scale-90">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-          <span className="text-[10px] font-bold uppercase tracking-widest">Shop</span>
+          <span className="text-[10px] font-medium">Shop</span>
         </button>
         
-        <button onClick={scrollToSearch} className="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 transition-colors active:scale-90">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button onClick={scrollToSearch} className="flex flex-col items-center gap-0.5 text-[#8E8E8E] active:scale-90">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <span className="text-[10px] font-bold uppercase tracking-widest">Search</span>
+          <span className="text-[10px] font-medium">Search</span>
         </button>
         
-        <button onClick={openHelp} className="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 transition-colors active:scale-90">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button onClick={openHelp} className="flex flex-col items-center gap-0.5 text-[#8E8E8E] active:scale-90">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
-          <span className="text-[10px] font-bold uppercase tracking-widest">Help</span>
+          <span className="text-[10px] font-medium">Help</span>
         </button>
       </div>
     </div>
