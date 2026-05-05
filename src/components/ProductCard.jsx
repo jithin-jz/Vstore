@@ -1,12 +1,22 @@
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "919876543210";
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "919562449137";
 
 const FALLBACK_IMAGE =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='18' fill='%2394a3b8'%3ENo Image%3C/text%3E%3C/svg%3E";
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='12' font-weight='600' fill='%239ca3af'%3ENO IMAGE%3C/text%3E%3C/svg%3E";
+
+const CATEGORY_MAP = {
+  creative: "Asset",
+  developer: "Toolkit",
+  ai: "Prompt",
+  streaming: "Stream",
+  education: "Course",
+  saas: "SaaS",
+};
 
 export default function ProductCard({ product }) {
-  const { title, price, description, image, paymentLink } = product;
+  const { title, price, description, image, paymentLink, category } = product;
 
-  function handleBuy() {
+  function handleBuy(e) {
+    e.preventDefault();
     if (paymentLink) {
       window.open(paymentLink, "_blank", "noopener,noreferrer");
     } else {
@@ -23,9 +33,9 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-950/5 transition-all duration-300 hover:shadow-xl hover:ring-gray-950/10 hover:-translate-y-1">
-      {/* Image */}
-      <div className="relative aspect-square overflow-hidden bg-gray-100">
+    <div className="group flex flex-col rounded-2xl border border-gray-100 bg-white p-1.5 shadow-sm transition-all hover:shadow-md sm:rounded-3xl sm:p-2">
+      {/* Image Wrap - Set to 1:1 Ratio */}
+      <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-50 sm:rounded-2xl">
         <img
           src={image || FALLBACK_IMAGE}
           alt={title}
@@ -33,37 +43,38 @@ export default function ProductCard({ product }) {
           onError={(e) => {
             e.target.src = FALLBACK_IMAGE;
           }}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        
+        {/* Category Badge */}
+        {category && (
+          <div className="absolute left-2 top-2 rounded-full bg-white/90 backdrop-blur-sm px-2 py-0.5 text-[8px] font-bold text-gray-900 shadow-sm sm:left-3 sm:top-3 sm:px-3 sm:py-1 sm:text-[10px]">
+            {CATEGORY_MAP[category] || category}
+          </div>
+        )}
       </div>
 
-      {/* Content */}
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-lg font-semibold leading-snug text-gray-900 line-clamp-2">
+      {/* Info Section */}
+      <div className="flex flex-col p-2 sm:p-4">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+          <h3 className="text-xs font-bold text-gray-900 line-clamp-1 sm:text-lg">
             {title}
           </h3>
-          <span className="shrink-0 rounded-full bg-emerald-50 px-3 py-1 text-sm font-bold text-emerald-700">
+          <span className="inline-flex w-fit items-center rounded-full bg-brand-green px-2 py-0.5 text-[10px] font-bold text-brand-green-text sm:px-3 sm:py-1 sm:text-sm">
             ₹{price?.toLocaleString("en-IN")}
           </span>
         </div>
+        
+        <p className="mt-1 text-[10px] leading-relaxed text-gray-500 line-clamp-2 sm:mt-2 sm:text-sm">
+          {description || "Premium digital resource designed for high-performance workflows."}
+        </p>
 
-        {description && (
-          <p className="text-sm leading-relaxed text-gray-500 line-clamp-2">
-            {description}
-          </p>
-        )}
-
-        <div className="mt-auto pt-2">
-          <button
-            onClick={handleBuy}
-            id={`buy-${product._id}`}
-            className="w-full cursor-pointer rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-800 active:scale-[0.98]"
-          >
-            Buy Now
-          </button>
-        </div>
+        <button
+          onClick={handleBuy}
+          className="mt-3 flex h-9 w-full items-center justify-center rounded-lg bg-gray-900 text-[10px] font-bold text-white transition-all hover:bg-black active:scale-95 sm:mt-6 sm:h-12 sm:rounded-xl sm:text-sm"
+        >
+          Buy Now
+        </button>
       </div>
     </div>
   );

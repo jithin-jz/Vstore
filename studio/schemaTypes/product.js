@@ -22,6 +22,22 @@ export default {
       rows: 4,
     },
     {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Creative & Design Assets', value: 'creative' },
+          { title: 'Developer Toolkits', value: 'developer' },
+          { title: 'AI Prompt Packs & Workflows', value: 'ai' },
+          { title: 'Streaming Access', value: 'streaming' },
+          { title: 'Education Resources', value: 'education' },
+          { title: 'SaaS Templates', value: 'saas' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'image',
       title: 'Product Image',
       type: 'image',
@@ -48,4 +64,20 @@ export default {
         ),
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      category: 'category',
+      media: 'image',
+      price: 'price',
+    },
+    prepare({ title, category, media, price }) {
+      const categoryLabel = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'No Category';
+      return {
+        title,
+        subtitle: `${categoryLabel} — ₹${price}`,
+        media,
+      };
+    },
+  },
 }

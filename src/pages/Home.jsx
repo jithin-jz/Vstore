@@ -1,89 +1,127 @@
 import { useState, useEffect } from "react";
 import { fetchProducts } from "../services/sanity";
 import ProductCard from "../components/ProductCard";
+import { CATEGORIES } from "../constants";
 
-export default function Home() {
+const MOCK_PRODUCTS = [
+  { _id: "1", title: "CapCut Pro Assets", price: 299, category: "creative", description: "Premium templates and effects pack for CapCut Pro.", image: null },
+  { _id: "2", title: "Next.js SaaS Boilerplate", price: 499, category: "developer", description: "Ultimate starter kit with Auth, DB, and Stripe integration.", image: null },
+  { _id: "3", title: "ChatGPT Prompt Bundle", price: 199, category: "ai", description: "500+ curated prompts for marketing and development.", image: null },
+  { _id: "4", title: "Notion OS Template", price: 599, category: "saas", description: "All-in-one workspace for personal and professional life.", image: null },
+];
+
+export default function Home({ activeCategory, setActiveCategory, searchQuery, setSearchQuery }) {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchProducts()
-      .then((data) => setProducts(data || []))
+      .then((data) => {
+        const finalData = (!data || data.length === 0) ? MOCK_PRODUCTS : data;
+        setProducts(finalData);
+        setFilteredProducts(finalData);
+      })
       .catch((err) => {
-        console.error("Failed to fetch products:", err);
-        setError("Unable to load products. Please try again later.");
+        console.error("Fetch error:", err);
+        setProducts(MOCK_PRODUCTS);
+        setFilteredProducts(MOCK_PRODUCTS);
+        setError("Preview mode enabled");
       })
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    let result = products;
+
+    // Filter by Category
+    if (activeCategory !== "all") {
+      result = result.filter(p => p.category === activeCategory);
+    }
+
+    // Filter by Search Query
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(p => 
+        p.title.toLowerCase().includes(q) || 
+        p.description?.toLowerCase().includes(q)
+      );
+    }
+
+    setFilteredProducts(result);
+  }, [activeCategory, searchQuery, products]);
+
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Header */}
-      <header className="mb-12 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Our Products
-        </h1>
-        <p className="mt-3 text-lg text-gray-500">
-          Browse our collection and grab what you love.
-        </p>
-      </header>
-
-      {/* Loading */}
-      {loading && (
-        <div className="flex items-center justify-center py-24">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-gray-900" />
+    <section id="products" className="bg-white pt-4 pb-8 px-3 sm:pt-24 sm:pb-16 sm:px-6">
+      <div className="mx-auto max-w-7xl">
+        {/* Section Header */}
+        <div className="hidden mb-8 text-center sm:mb-12 sm:block">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            Digital Solutions
+          </h2>
         </div>
-      )}
 
-      {/* Error */}
-      {error && (
-        <div className="mx-auto max-w-md rounded-2xl border border-red-200 bg-red-50 p-6 text-center">
-          <p className="text-sm font-medium text-red-800">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="mt-4 cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
-          >
-            Retry
-          </button>
-        </div>
-      )}
-
-      {/* Empty State */}
-      {!loading && !error && products.length === 0 && (
-        <div className="py-24 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
-            <svg
-              className="h-8 w-8 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25-2.25M12 13.875V7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
+        {/* Search Bar (Mobile Only) - Hidden as requested */}
+        <div className="hidden mx-auto mb-8 max-w-2xl px-4 sm:hidden">
+          <div className="relative group">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search products, services..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-12 w-full rounded-2xl border-none bg-gray-50 pl-12 pr-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 focus:bg-white focus:ring-2 focus:ring-gray-900/10 transition-all sm:h-14 sm:rounded-full sm:text-base"
+            />
+            <svg className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-900 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900">
-            No products available
-          </h2>
-          <p className="mt-2 text-sm text-gray-500">
-            Check back later for new arrivals.
-          </p>
         </div>
-      )}
 
-      {/* Product Grid */}
-      {!loading && !error && products.length > 0 && (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+        {/* Categories Filter - Sticky App Tabs (Mobile Only) */}
+        <div className="sticky top-[64px] z-30 -mx-3 mb-10 bg-white py-4 backdrop-blur-md sm:hidden">
+          <div className="flex items-center justify-start overflow-x-auto px-4 hide-scrollbar sm:justify-center sm:px-0">
+            <div className="flex gap-3 sm:flex-wrap sm:justify-center">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat.value}
+                  onClick={() => setActiveCategory(cat.value)}
+                  className={`whitespace-nowrap px-6 py-3 rounded-full text-xs font-bold transition-all duration-300 ${
+                    activeCategory === cat.value
+                        ? "bg-gray-900 text-white shadow-xl shadow-gray-200"
+                      : "bg-white border border-gray-100 text-gray-500 hover:bg-gray-50"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-      )}
-    </main>
+
+        {/* Grid - 2 columns on mobile */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-8 lg:grid-cols-4 min-h-[300px]">
+          {loading ? (
+            [...Array(4)].map((_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="aspect-[4/5] rounded-3xl bg-gray-50" />
+                <div className="mt-4 h-5 w-3/4 rounded bg-gray-50" />
+                <div className="mt-2 h-3 w-1/4 rounded bg-gray-50" />
+              </div>
+            ))
+          ) : filteredProducts.length > 0 ? (
+            filteredProducts.map((p) => <ProductCard key={p._id} product={p} />)
+          ) : (
+            <div className="col-span-full flex flex-col items-center justify-center py-20 text-gray-400">
+              <svg className="w-12 h-12 mb-4 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+              </svg>
+              <p className="text-xs font-medium sm:text-sm">No products found in this category.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }

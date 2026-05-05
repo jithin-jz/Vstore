@@ -13,6 +13,7 @@ export async function fetchProducts() {
     title,
     price,
     description,
+    category,
     "image": image.asset->url,
     paymentLink
   }`;
