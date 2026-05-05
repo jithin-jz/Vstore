@@ -33,9 +33,9 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="group flex flex-col border border-[#DBDBDB] bg-white transition-all sm:rounded-sm">
+    <div className="group flex flex-col rounded-2xl border border-gray-100 bg-white p-1.5 shadow-sm transition-all hover:shadow-md sm:rounded-3xl sm:p-2">
       {/* Image Wrap - Set to 1:1 Ratio */}
-      <div className="relative aspect-square overflow-hidden bg-white">
+      <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-50 sm:rounded-2xl">
         <img
           src={image || FALLBACK_IMAGE}
           alt={title}
@@ -45,26 +45,28 @@ export default function ProductCard({ product }) {
           }}
           className="h-full w-full object-cover"
         />
+        
+
       </div>
 
       {/* Info Section */}
-      <div className="flex flex-col p-3 sm:p-4">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-[13px] font-bold text-[#262626] line-clamp-1 sm:text-base">
+      <div className="flex flex-col p-2 sm:p-4">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+          <h3 className="text-xs font-bold text-gray-900 line-clamp-1 sm:text-lg">
             {title}
           </h3>
-          <span className="text-[13px] font-bold text-[#262626] sm:text-base">
+          <span className="inline-flex w-fit items-center rounded-full bg-brand-green px-2 py-0.5 text-[10px] font-bold text-brand-green-text sm:px-3 sm:py-1 sm:text-sm">
             ₹{price?.toLocaleString("en-IN")}
           </span>
         </div>
         
-        <p className="mt-1 text-[12px] leading-snug text-[#8E8E8E] line-clamp-2 sm:mt-1.5 sm:text-[13px]">
+        <p className="mt-1 text-[10px] leading-relaxed text-gray-500 line-clamp-2 sm:mt-2 sm:text-sm">
           {description || "Premium digital resource designed for high-performance workflows."}
         </p>
 
         <button
           onClick={handleBuy}
-          className="mt-4 flex h-8 w-full items-center justify-center rounded-[4px] bg-[#0095F6] text-[12px] font-bold text-white transition-all hover:bg-[#1877F2] active:opacity-70 sm:h-9 sm:text-[13px]"
+          className="mt-3 flex h-9 w-full items-center justify-center rounded-lg bg-gray-900 text-[10px] font-bold text-white transition-all hover:bg-black active:scale-95 sm:mt-6 sm:h-12 sm:rounded-xl sm:text-sm"
         >
           Buy Now
         </button>

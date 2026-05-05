@@ -64,18 +64,18 @@ export default function Home({ activeCategory, setActiveCategory, searchQuery, s
 
 
 
-        {/* Categories Filter - Instagram Style Pills (Mobile Only) */}
-        <div className="mb-6 bg-white py-2 sm:hidden border-b border-[#DBDBDB]">
-          <div className="flex items-center justify-start overflow-x-auto px-4 hide-scrollbar">
-            <div className="flex gap-2">
+        {/* Categories Filter - Scrollable Tabs (Mobile Only) */}
+        <div className="mb-10 bg-white py-4 sm:hidden">
+          <div className="flex items-center justify-start overflow-x-auto px-4 hide-scrollbar sm:justify-center sm:px-0">
+            <div className="flex gap-3 sm:flex-wrap sm:justify-center">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat.value}
                   onClick={() => setActiveCategory(cat.value)}
-                  className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-[13px] font-bold border transition-all ${
+                  className={`whitespace-nowrap px-6 py-3 rounded-full text-xs font-bold transition-all duration-300 ${
                     activeCategory === cat.value
-                        ? "bg-[#262626] text-white border-[#262626]"
-                      : "bg-white border-[#DBDBDB] text-[#262626]"
+                        ? "bg-gray-900 text-white shadow-xl shadow-gray-200"
+                      : "bg-white border border-gray-100 text-gray-500 hover:bg-gray-50"
                   }`}
                 >
                   {cat.label}
@@ -85,8 +85,8 @@ export default function Home({ activeCategory, setActiveCategory, searchQuery, s
           </div>
         </div>
 
-        {/* Grid - High density like IG explore */}
-        <div className="grid grid-cols-2 gap-1 sm:gap-6 lg:grid-cols-4 min-h-[300px]">
+        {/* Grid - 2 columns on mobile */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-8 lg:grid-cols-4 min-h-[300px]">
           {loading ? (
             [...Array(4)].map((_, i) => (
               <div key={i} className="animate-pulse">
