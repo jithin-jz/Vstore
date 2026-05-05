@@ -24,7 +24,7 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
     <nav 
       className={`fixed top-0 z-50 w-full transition-all duration-500 ${
         isScrolled 
-          ? "bg-white py-3 border-b border-gray-100/50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]" 
+          ? "bg-white/80 backdrop-blur-lg py-3 border-b border-gray-100/50 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]" 
           : "bg-transparent py-4 sm:py-6"
       }`}
     >

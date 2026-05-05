@@ -46,12 +46,7 @@ export default function ProductCard({ product }) {
           className="h-full w-full object-cover"
         />
         
-        {/* Category Badge */}
-        {category && (
-          <div className="absolute left-2 top-2 rounded-full bg-white/90 backdrop-blur-sm px-2 py-0.5 text-[8px] font-bold text-gray-900 shadow-sm sm:left-3 sm:top-3 sm:px-3 sm:py-1 sm:text-[10px]">
-            {CATEGORY_MAP[category] || category}
-          </div>
-        )}
+
       </div>
 
       {/* Info Section */}
