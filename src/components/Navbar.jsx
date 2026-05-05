@@ -116,6 +116,30 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
           </div>
         </div>
       </div>
+
+      {/* Mobile Categories Row */}
+      <div className="sm:hidden border-t border-gray-50/50 bg-white/50 backdrop-blur-md">
+        <div className="flex items-center justify-start overflow-x-auto px-4 py-3 hide-scrollbar">
+          <div className="flex gap-2.5">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.value}
+                onClick={() => {
+                  setActiveCategory(cat.value);
+                  document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className={`whitespace-nowrap px-4 py-2 text-xs font-bold transition-all duration-300 rounded-xl ${
+                  activeCategory === cat.value
+                    ? "bg-gray-900 text-white shadow-md shadow-gray-200"
+                    : "bg-gray-100/50 text-gray-500 hover:text-gray-900"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }
