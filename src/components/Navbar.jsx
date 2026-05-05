@@ -109,6 +109,11 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
           </button>
           
 
+          <div className="flex sm:hidden">
+            <a href="#products" className="text-sm font-bold text-gray-900 bg-gray-100 px-4 py-2 rounded-xl">
+              Shop
+            </a>
+          </div>
         </div>
       </div>
     </nav>
