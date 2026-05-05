@@ -21,7 +21,13 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
   };
 
   return (
-    <nav className="relative z-50 w-full bg-white py-4 border-b border-gray-100">
+    <nav 
+      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+        isScrolled 
+          ? "bg-white py-3 border-b border-gray-100 shadow-sm" 
+          : "bg-white/80 py-4 backdrop-blur-md border-b border-transparent"
+      }`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         {/* Left: Logo */}
         <div className="flex-shrink-0">
@@ -103,11 +109,7 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
           </button>
           
 
-          <div className="flex sm:hidden">
-            <a href="#products" className="text-sm font-bold text-gray-900 bg-gray-100 px-4 py-2 rounded-xl">
-              Shop
-            </a>
-          </div>
+
         </div>
       </div>
     </nav>

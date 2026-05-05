@@ -53,7 +53,7 @@ export default function Home({ activeCategory, setActiveCategory, searchQuery, s
   }, [activeCategory, searchQuery, products]);
 
   return (
-    <section id="products" className="bg-white pt-4 pb-8 px-3 sm:pt-12 sm:pb-16 sm:px-6">
+    <section id="products" className="bg-white pt-20 pb-8 px-3 sm:pt-24 sm:pb-16 sm:px-6">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="hidden mb-8 text-center sm:mb-12 sm:block">
