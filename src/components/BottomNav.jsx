@@ -31,7 +31,7 @@ export default function BottomNav({ setSearchQuery }) {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 z-50 w-full border-t border-gray-100 bg-white/80 px-6 py-3 backdrop-blur-lg sm:hidden">
+    <div className="fixed bottom-0 left-0 z-50 w-full border-t border-gray-200 bg-white px-6 py-3 sm:hidden">
       <div className="flex items-center justify-between">
         <button onClick={scrollToTop} className="flex flex-col items-center gap-1 text-gray-900 transition-all active:scale-90">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

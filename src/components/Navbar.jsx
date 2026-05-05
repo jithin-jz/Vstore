@@ -22,10 +22,10 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
 
   return (
     <nav 
-      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isScrolled 
-          ? "bg-white py-3 border-b border-gray-100 shadow-sm" 
-          : "bg-white/80 py-4 backdrop-blur-md border-b border-transparent"
+          ? "bg-white border-b border-gray-200 shadow-none" 
+          : "bg-white border-b border-gray-100"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
