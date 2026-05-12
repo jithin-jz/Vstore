@@ -51,7 +51,7 @@
    ========================================================================= */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Lenis drives smooth scrolling — native smooth-behavior would conflict. */
   }
   body {
     @apply bg-canvas text-ink antialiased;

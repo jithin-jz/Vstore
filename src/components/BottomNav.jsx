@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { smoothScrollTo, scrollToTop } from "../lib/scroll";
 
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "919562449137";
 
 export default function BottomNav() {
   const [active, setActive] = useState("home");
 
-  // Sync active tab to scroll position so indigo state follows the user.
+  // Sync active tab to scroll position so the indigo highlight follows the user.
   useEffect(() => {
     const handleScroll = () => {
       const products = document.getElementById("products");
@@ -17,29 +18,15 @@ export default function BottomNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const scrollToShop = (e) => {
-    e.preventDefault();
-    const el = document.getElementById("products");
-    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
-  };
-
-  const scrollToSearch = (e) => {
-    e.preventDefault();
+  const goSearch = () => {
     const el = document.getElementById("search-input");
     if (!el) return;
-    const offsetPosition =
-      el.getBoundingClientRect().top + window.scrollY - 100;
-    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-    setTimeout(() => el.focus(), 600);
+    smoothScrollTo(el, { offset: -100 });
+    // Focus slightly after the scroll begins so iOS doesn't cancel the animation.
+    setTimeout(() => el.focus(), 700);
   };
 
-  const openHelp = (e) => {
-    e.preventDefault();
+  const openHelp = () => {
     const message = encodeURIComponent("Hi, I need help with your store services.");
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank", "noopener,noreferrer");
   };
@@ -56,7 +43,7 @@ export default function BottomNav() {
     {
       key: "shop",
       label: "Shop",
-      onClick: scrollToShop,
+      onClick: () => smoothScrollTo("#products"),
       icon: (
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
       ),
@@ -64,7 +51,7 @@ export default function BottomNav() {
     {
       key: "search",
       label: "Search",
-      onClick: scrollToSearch,
+      onClick: goSearch,
       icon: (
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       ),
@@ -87,9 +74,10 @@ export default function BottomNav() {
           return (
             <button
               key={item.key}
-              onClick={(e) => {
+              type="button"
+              onClick={() => {
                 setActive(item.key);
-                item.onClick(e);
+                item.onClick();
               }}
               className={`flex flex-1 flex-col items-center gap-1 rounded-lg py-2 transition-colors ${
                 isActive ? "text-primary" : "text-ink-mute"

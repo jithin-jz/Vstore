@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchBox from "./SearchBox";
 import { CATEGORIES } from "../constants";
+import { smoothScrollTo } from "../lib/scroll";
 
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "919562449137";
 
@@ -78,7 +79,7 @@ export default function Navbar({
                   key={cat.value}
                   onClick={() => {
                     setActiveCategory(cat.value);
-                    document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+                    smoothScrollTo("#products");
                   }}
                   className={`relative text-[15px] transition-colors ${
                     active ? "text-primary" : "text-ink hover:text-primary"

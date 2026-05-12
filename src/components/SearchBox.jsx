@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { CATEGORY_LABEL, POPULAR_CATEGORIES } from "../constants";
+import { smoothScrollTo } from "../lib/scroll";
 
 const RECENT_KEY = "store:recent-searches";
 const MAX_RECENT = 5;
@@ -96,7 +97,7 @@ export default function SearchBox({
   };
 
   const scrollToProducts = () => {
-    document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+    smoothScrollTo("#products");
   };
 
   const selectProduct = (p) => {
