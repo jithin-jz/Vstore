@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
+import SearchBox from "./SearchBox";
 import { CATEGORIES } from "../constants";
 
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "919562449137";
 
-export default function Navbar({ activeCategory, setActiveCategory, searchQuery, setSearchQuery }) {
+export default function Navbar({
+  products,
+  activeCategory,
+  setActiveCategory,
+  searchQuery,
+  setSearchQuery,
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -15,7 +22,11 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
   const openHelp = (e) => {
     e.preventDefault();
     const message = encodeURIComponent("Hi, I need help with your store services.");
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank", "noopener,noreferrer");
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
@@ -26,53 +37,39 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
           : "bg-canvas/80 backdrop-blur-md py-4 border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 sm:gap-4 sm:px-6">
         {/* Wordmark */}
         <a href="/" className="flex-shrink-0">
-          <span className="text-[20px] leading-none text-ink" style={{ fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <span
+            className="text-[20px] leading-none text-ink"
+            style={{ fontWeight: 400, letterSpacing: "-0.02em" }}
+          >
             Store<span className="text-primary">.</span>
           </span>
         </a>
 
-        {/* Mobile search */}
+        {/* Mobile search — SearchBox shares the same component */}
         <div className="ml-auto w-[62%] sm:hidden">
-          <div className="relative">
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Search assets"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="text-input h-10 pl-9"
-            />
-            <svg
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-mute"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
+          <SearchBox
+            products={products}
+            query={searchQuery}
+            setQuery={setSearchQuery}
+            setActiveCategory={setActiveCategory}
+            placeholder="Search assets"
+          />
         </div>
 
-        {/* Desktop search + categories */}
+        {/* Desktop: search in the middle, category links, Support CTA on the right */}
         <div className="hidden flex-1 items-center justify-center gap-8 px-8 sm:flex">
-          <div className="relative w-full max-w-sm">
-            <svg
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-mute"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search premium assets"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="text-input h-10 pl-9"
+          <div className="w-full max-w-sm">
+            <SearchBox
+              products={products}
+              query={searchQuery}
+              setQuery={setSearchQuery}
+              setActiveCategory={setActiveCategory}
             />
           </div>
 
-          {/* Category links — underlined indigo on active */}
           <div className="flex items-center gap-5">
             {CATEGORIES.slice(0, 5).map((cat) => {
               const active = activeCategory === cat.value;
@@ -90,7 +87,7 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
                 >
                   {cat.label}
                   {active && (
-                    <span className="absolute -bottom-1.5 left-0 right-0 h-[2px] bg-primary rounded-full" />
+                    <span className="absolute -bottom-1.5 left-0 right-0 h-[2px] rounded-full bg-primary" />
                   )}
                 </button>
               );
@@ -98,7 +95,7 @@ export default function Navbar({ activeCategory, setActiveCategory, searchQuery,
           </div>
         </div>
 
-        {/* Right-side CTA: one filled indigo pill per band */}
+        {/* Support CTA */}
         <div className="hidden items-center gap-3 sm:flex">
           <button onClick={openHelp} className="btn-pill text-[14px] px-4 py-2">
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">

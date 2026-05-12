@@ -1,16 +1,9 @@
+import { CATEGORY_LABEL } from "../constants";
+
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "919562449137";
 
 const FALLBACK_IMAGE =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23f6f9fc'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,system-ui' font-size='12' font-weight='400' fill='%2364748d'%3ENO IMAGE%3C/text%3E%3C/svg%3E";
-
-const CATEGORY_LABEL = {
-  creative: "ASSET",
-  developer: "TOOLKIT",
-  ai: "PROMPT",
-  streaming: "STREAM",
-  education: "COURSE",
-  saas: "SAAS",
-};
 
 export default function ProductCard({ product }) {
   const { title, price, description, image, paymentLink, category } = product;
