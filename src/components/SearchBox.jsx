@@ -352,15 +352,6 @@ export default function SearchBox({
                   </li>
                 ))}
               </ul>
-
-              <div className="mt-1 flex items-center gap-3 border-t border-hairline px-3 py-2">
-                <kbd className="rounded-md border border-hairline bg-canvas-soft px-1.5 py-0.5 text-[10px] text-ink-mute">↵</kbd>
-                <span className="caption text-ink-mute">to select</span>
-                <kbd className="ml-2 rounded-md border border-hairline bg-canvas-soft px-1.5 py-0.5 text-[10px] text-ink-mute">↑↓</kbd>
-                <span className="caption text-ink-mute">to navigate</span>
-                <kbd className="ml-2 rounded-md border border-hairline bg-canvas-soft px-1.5 py-0.5 text-[10px] text-ink-mute">esc</kbd>
-                <span className="caption text-ink-mute">to close</span>
-              </div>
             </div>
           )}
         </div>

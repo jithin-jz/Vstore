@@ -13,7 +13,7 @@ const MOCK_PRODUCTS = [
   { _id: "1", title: "CapCut Pro Assets", price: 299, category: "creative", description: "Premium templates and effects pack for CapCut Pro.", image: null },
   { _id: "2", title: "Next.js SaaS Boilerplate", price: 499, category: "developer", description: "Ultimate starter kit with Auth, DB, and Stripe integration.", image: null },
   { _id: "3", title: "ChatGPT Prompt Bundle", price: 199, category: "ai", description: "500+ curated prompts for marketing and development.", image: null },
-  { _id: "4", title: "Notion OS Template", price: 599, category: "saas", description: "All-in-one workspace for personal and professional life.", image: null },
+  { _id: "4", title: "Notion OS Template", price: 599, category: "creative", description: "All-in-one workspace template for personal and professional life.", image: null },
 ];
 
 export default function App() {

@@ -1,3 +1,16 @@
+// Short, normal category names used across the schema dropdown and the
+// preview subtitle. Keep values in sync with src/constants.js on the frontend.
+const CATEGORY_OPTIONS = [
+  { title: 'Design', value: 'creative' },
+  { title: 'Tools', value: 'developer' },
+  { title: 'AI', value: 'ai' },
+  { title: 'Streaming', value: 'streaming' },
+]
+
+const CATEGORY_LABEL = Object.fromEntries(
+  CATEGORY_OPTIONS.map((c) => [c.value, c.title])
+)
+
 export default {
   name: 'product',
   title: 'Product',
@@ -26,14 +39,7 @@ export default {
       title: 'Category',
       type: 'string',
       options: {
-        list: [
-          { title: 'Creative & Design Assets', value: 'creative' },
-          { title: 'Developer Toolkits', value: 'developer' },
-          { title: 'AI Prompt Packs & Workflows', value: 'ai' },
-          { title: 'Streaming Access', value: 'streaming' },
-          { title: 'Education Resources', value: 'education' },
-          { title: 'SaaS Templates', value: 'saas' },
-        ],
+        list: CATEGORY_OPTIONS,
       },
       validation: (Rule) => Rule.required(),
     },
@@ -59,7 +65,7 @@ export default {
       description:
         'Optional. If provided, Buy Now redirects here instead of WhatsApp.',
       validation: (Rule) =>
-        Rule.uri({scheme: ['http', 'https']}).error(
+        Rule.uri({ scheme: ['http', 'https'] }).error(
           'Must be a valid URL (http or https)',
         ),
     },
@@ -72,12 +78,12 @@ export default {
       price: 'price',
     },
     prepare({ title, category, media, price }) {
-      const categoryLabel = category ? category.charAt(0).toUpperCase() + category.slice(1) : 'No Category';
+      const label = CATEGORY_LABEL[category] || 'Uncategorized'
       return {
         title,
-        subtitle: `${categoryLabel} — ₹${price}`,
+        subtitle: `${label} · ₹${price ?? 0}`,
         media,
-      };
+      }
     },
   },
 }

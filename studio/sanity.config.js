@@ -25,29 +25,23 @@ export default defineConfig({
 
             // Category Wise
             S.listItem()
-              .title('Products by Category')
+              .title('By Category')
               .child(
                 S.list()
                   .title('Categories')
                   .items([
                     S.listItem()
-                      .title('Creative & Design')
-                      .child(S.documentList().title('Creative Assets').filter('_type == "product" && category == "creative"')),
+                      .title('Design')
+                      .child(S.documentList().title('Design').filter('_type == "product" && category == "creative"')),
                     S.listItem()
-                      .title('Developer Toolkits')
-                      .child(S.documentList().title('Dev Toolkits').filter('_type == "product" && category == "developer"')),
+                      .title('Tools')
+                      .child(S.documentList().title('Tools').filter('_type == "product" && category == "developer"')),
                     S.listItem()
-                      .title('AI Prompts')
-                      .child(S.documentList().title('AI Assets').filter('_type == "product" && category == "ai"')),
+                      .title('AI')
+                      .child(S.documentList().title('AI').filter('_type == "product" && category == "ai"')),
                     S.listItem()
                       .title('Streaming')
-                      .child(S.documentList().title('Streaming Access').filter('_type == "product" && category == "streaming"')),
-                    S.listItem()
-                      .title('Education')
-                      .child(S.documentList().title('Edu Resources').filter('_type == "product" && category == "education"')),
-                    S.listItem()
-                      .title('SaaS Templates')
-                      .child(S.documentList().title('SaaS Assets').filter('_type == "product" && category == "saas"')),
+                      .child(S.documentList().title('Streaming').filter('_type == "product" && category == "streaming"')),
                   ])
               ),
             
