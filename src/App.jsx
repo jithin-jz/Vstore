@@ -11,16 +11,16 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="min-h-screen bg-white font-sans antialiased text-black pb-20 sm:pb-0">
-      <Navbar 
-        activeCategory={activeCategory} 
+    <div className="min-h-screen bg-canvas text-ink antialiased pb-20 sm:pb-0">
+      <Navbar
+        activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
       <Hero />
-      <Home 
-        activeCategory={activeCategory} 
+      <Home
+        activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}

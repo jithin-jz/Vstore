@@ -1,25 +1,49 @@
 export default function Footer() {
   return (
-    <footer className="hidden bg-white border-t border-gray-50 py-6 px-4 sm:block">
-      <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-y-4 gap-x-2 sm:flex-nowrap sm:gap-6">
-        {/* Brand & Copyright Group */}
-        <div className="flex items-center gap-3">
-          <a href="/" className="text-lg font-bold tracking-tight text-gray-900">
-            Store<span className="text-brand-orange">.</span>
-          </a>
-          <span className="h-3 w-[1px] bg-gray-200 hidden sm:block" />
-          <p className="text-[9px] font-medium text-gray-400">
-            © 2026
-          </p>
+    <footer className="hidden border-t border-hairline bg-canvas px-6 py-16 sm:block">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-wrap items-start justify-between gap-10">
+          {/* Brand column */}
+          <div className="max-w-xs">
+            <a href="/" className="text-[20px] leading-none text-ink" style={{ fontWeight: 400, letterSpacing: "-0.02em" }}>
+              Store<span className="text-primary">.</span>
+            </a>
+            <p className="caption mt-4 text-ink-mute">
+              Premium digital products, delivered instantly via WhatsApp or a
+              secure payment link.
+            </p>
+          </div>
+
+          {/* Link groups */}
+          <div className="grid grid-cols-3 gap-10 sm:gap-16">
+            <div>
+              <p className="micro-cap text-ink-mute uppercase">Product</p>
+              <ul className="mt-3 space-y-2">
+                <li><a href="#products" className="caption text-ink hover:text-primary">Catalog</a></li>
+                <li><a href="#products" className="caption text-ink hover:text-primary">Pricing</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="micro-cap text-ink-mute uppercase">Company</p>
+              <ul className="mt-3 space-y-2">
+                <li><a href="#" className="caption text-ink hover:text-primary">About</a></li>
+                <li><a href="#" className="caption text-ink hover:text-primary">Support</a></li>
+              </ul>
+            </div>
+            <div>
+              <p className="micro-cap text-ink-mute uppercase">Legal</p>
+              <ul className="mt-3 space-y-2">
+                <li><a href="#" className="caption text-ink hover:text-primary">Terms</a></li>
+                <li><a href="#" className="caption text-ink hover:text-primary">Privacy</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
 
-        {/* Links Group */}
-        <div className="flex items-center gap-4 sm:gap-8">
-          <div className="flex items-center gap-4 text-[9px] font-bold uppercase tracking-widest text-gray-900">
-            <a href="#" className="hover:text-brand-orange transition-colors">Terms</a>
-            <a href="#" className="hover:text-brand-orange transition-colors">Privacy</a>
-            <a href="#" className="hover:text-brand-orange transition-colors">Support</a>
-          </div>
+        {/* Legal row */}
+        <div className="mt-12 flex flex-wrap items-center justify-between border-t border-hairline pt-6">
+          <p className="caption text-ink-mute">© 2026 Store. All rights reserved.</p>
+          <p className="caption text-ink-mute">Built for creators, developers, and teams.</p>
         </div>
       </div>
     </footer>

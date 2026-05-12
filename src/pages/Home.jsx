@@ -10,11 +10,10 @@ const MOCK_PRODUCTS = [
   { _id: "4", title: "Notion OS Template", price: 599, category: "saas", description: "All-in-one workspace for personal and professional life.", image: null },
 ];
 
-export default function Home({ activeCategory, setActiveCategory, searchQuery, setSearchQuery }) {
+export default function Home({ activeCategory, setActiveCategory, searchQuery }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchProducts()
@@ -27,82 +26,86 @@ export default function Home({ activeCategory, setActiveCategory, searchQuery, s
         console.error("Fetch error:", err);
         setProducts(MOCK_PRODUCTS);
         setFilteredProducts(MOCK_PRODUCTS);
-        setError("Preview mode enabled");
       })
       .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
     let result = products;
-
-    // Filter by Category
     if (activeCategory !== "all") {
-      result = result.filter(p => p.category === activeCategory);
+      result = result.filter((p) => p.category === activeCategory);
     }
-
-    // Filter by Search Query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      result = result.filter(p => 
-        p.title.toLowerCase().includes(q) || 
+      result = result.filter((p) =>
+        p.title.toLowerCase().includes(q) ||
         p.description?.toLowerCase().includes(q)
       );
     }
-
     setFilteredProducts(result);
   }, [activeCategory, searchQuery, products]);
 
   return (
-    <section id="products" className="bg-white pt-20 pb-8 px-3 sm:pt-24 sm:pb-16 sm:px-6">
+    <section id="products" className="bg-canvas-soft px-4 pt-16 pb-20 sm:pt-24 sm:pb-28 sm:px-6">
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className="hidden mb-8 text-center sm:mb-12 sm:block">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Digital Solutions
+        {/* Section header — display-lg, thin weight, negative tracking */}
+        <div className="mb-10 sm:mb-14 text-center">
+          <span className="pill-tag-soft mb-4 hidden sm:inline-flex">
+            CATALOG
+          </span>
+          <h2 className="display-lg text-ink sm:text-[40px]">
+            Digital solutions, instantly delivered.
           </h2>
+          <p className="caption mx-auto mt-3 max-w-xl text-ink-mute">
+            Browse the catalog. Tap buy — we deliver via WhatsApp or a direct payment link.
+          </p>
         </div>
 
-
-
-        {/* Categories Filter - Scrollable Tabs (Mobile Only) */}
-        <div className="mb-10 bg-white py-4 sm:hidden">
-          <div className="flex items-center justify-start overflow-x-auto px-4 hide-scrollbar sm:justify-center sm:px-0">
-            <div className="flex gap-3 sm:flex-wrap sm:justify-center">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.value}
-                  onClick={() => setActiveCategory(cat.value)}
-                  className={`whitespace-nowrap px-6 py-3 rounded-full text-xs font-bold transition-all duration-300 ${
-                    activeCategory === cat.value
-                        ? "bg-gray-900 text-white shadow-xl shadow-gray-200"
-                      : "bg-white border border-gray-100 text-gray-500 hover:bg-gray-50"
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+        {/* Mobile filter pills — ink scheme, subdued indigo on active */}
+        <div className="mb-8 sm:hidden">
+          <div className="flex items-center overflow-x-auto hide-scrollbar">
+            <div className="flex gap-2 px-1">
+              {CATEGORIES.map((cat) => {
+                const active = activeCategory === cat.value;
+                return (
+                  <button
+                    key={cat.value}
+                    onClick={() => setActiveCategory(cat.value)}
+                    className={`whitespace-nowrap rounded-full px-4 py-2 text-[13px] transition-colors border ${
+                      active
+                        ? "bg-primary-subdued text-primary-deep border-transparent"
+                        : "bg-canvas text-ink-secondary border-hairline"
+                    }`}
+                    style={{ fontWeight: active ? 400 : 300 }}
+                  >
+                    {cat.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
 
-        {/* Grid - 2 columns on mobile */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-8 lg:grid-cols-4 min-h-[300px]">
+        {/* Product grid */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4 min-h-[300px]">
           {loading ? (
             [...Array(4)].map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="aspect-[4/5] rounded-3xl bg-gray-50" />
-                <div className="mt-4 h-5 w-3/4 rounded bg-gray-50" />
-                <div className="mt-2 h-3 w-1/4 rounded bg-gray-50" />
+              <div key={i} className="card-light overflow-hidden animate-pulse">
+                <div className="aspect-square bg-canvas-soft" />
+                <div className="p-4">
+                  <div className="h-4 w-3/4 rounded bg-canvas-soft" />
+                  <div className="mt-2 h-3 w-1/3 rounded bg-canvas-soft" />
+                </div>
               </div>
             ))
           ) : filteredProducts.length > 0 ? (
             filteredProducts.map((p) => <ProductCard key={p._id} product={p} />)
           ) : (
-            <div className="col-span-full flex flex-col items-center justify-center py-20 text-gray-400">
-              <svg className="w-12 h-12 mb-4 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+            <div className="col-span-full flex flex-col items-center justify-center py-20 text-ink-mute">
+              <svg className="w-10 h-10 mb-4 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
               </svg>
-              <p className="text-xs font-medium sm:text-sm">No products found in this category.</p>
+              <p className="caption">No products found in this category.</p>
             </div>
           )}
         </div>
