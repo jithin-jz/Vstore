@@ -32,7 +32,7 @@ export default function Hero() {
 
         <p className="mt-6 max-w-2xl text-[16px] leading-[1.4] text-ink-secondary sm:text-[18px]" style={{ fontWeight: 300 }}>
           The elite marketplace for professional software, creative assets, and
-          high-performance digital tools — delivered instantly.
+          high performance digital tools delivered instantly.
         </p>
 
         {/* One filled indigo pill per band + outline secondary */}

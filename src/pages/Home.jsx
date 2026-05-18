@@ -32,7 +32,7 @@ export default function Home({ products, loading, activeCategory, setActiveCateg
             Digital solutions, instantly delivered.
           </h2>
           <p className="caption mx-auto mt-3 max-w-xl text-ink-mute">
-            Browse the catalog. Tap buy — we deliver via WhatsApp or a direct payment link.
+            Browse the catalog. Tap buy we deliver via WhatsApp or a direct payment link.
           </p>
         </div>
 
